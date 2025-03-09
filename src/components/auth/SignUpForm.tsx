@@ -1,24 +1,18 @@
-import { useState } from "react";
-import { useAuth } from "../../../supabase/auth";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardFooter,
-} from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { useNavigate, Link } from "react-router-dom";
-import AuthLayout from "./AuthLayout";
-import { UserPlus } from "lucide-react";
+import { useState } from 'react';
+import { useAuth } from '../../../supabase/auth';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { useNavigate, Link } from 'react-router-dom';
+import AuthLayout from './AuthLayout';
+import { UserPlus } from 'lucide-react';
 
 export default function SignUpForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [error, setError] = useState('');
   const { signUp } = useAuth();
   const navigate = useNavigate();
 
@@ -26,9 +20,10 @@ export default function SignUpForm() {
     e.preventDefault();
     try {
       await signUp(email, password, fullName);
-      navigate("/login");
+      navigate('/login');
     } catch (error) {
-      setError("Error creating account");
+      console.log(error);
+      setError('Error creating account');
     }
   };
 
@@ -82,7 +77,7 @@ export default function SignUpForm() {
         </CardContent>
         <CardFooter className="flex flex-col space-y-4">
           <div className="text-sm text-center text-slate-600">
-            Already have an account?{" "}
+            Already have an account?{' '}
             <Link to="/login" className="text-primary hover:underline">
               Sign in
             </Link>
